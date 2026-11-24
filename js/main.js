@@ -112,8 +112,8 @@ function wireVideo() {
   const cap = frame.querySelector('.reel__cap');
   const v = document.createElement('video');
   v.src = src;
-  v.controls = true;
-  v.playsInline = true;
+  v.muted = true; v.loop = true; v.autoplay = true; v.controls = true;
+  v.playsInline = true; v.setAttribute('muted',''); v.setAttribute('playsinline','');
   v.preload = 'metadata';
   if (img) v.poster = img.getAttribute('src');
   v.setAttribute('aria-label', 'keelyard promo');
