@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>keelyard — Agents can't lie about tests</title>
+  <meta name="description" content="keelyard is a local Python CLI and MCP server that stops Claude Code, Codex and OpenCode from finishing until a passing test run proves their work. Every edit is snapshotted so any step can be undone. Apache-2.0, no telemetry.">
+  <meta name="theme-color" content="#111111">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://akobirjontulqinovfuture.github.io/keelyard-site/">
+  <meta property="og:title" content="keelyard — Agents can't lie about tests">
+  <meta property="og:description" content="A local CLI and MCP server that makes coding agents prove their work before they say done.">
+  <meta property="og:image" content="https://akobirjontulqinovfuture.github.io/keelyard-site/assets/og.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="assets/favicon-32.png" sizes="32x32">
+  <link rel="preload" href="assets/fonts/InstrumentSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/InstrumentSerif-Italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav">
+    <a class="nav__brand" href="#" aria-label="keelyard home">
+      <img src="assets/lockup-dark.svg" alt="keelyard" width="148" height="28">
+    </a>
+    <nav class="nav__links">
+      <a href="#story">The gate</a>
+      <a href="#rewind">Rewind</a>
+      <a href="#install">Install</a>
+      <a href="https://akobirjontulqinovfuture.github.io/keelyard/">Docs</a>
+      <a class="nav__gh" href="https://github.com/akobirjontulqinovfuture/keelyard">GitHub <span data-stars hidden></span></a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <p class="eyebrow">Local CLI + MCP server for Claude Code, Codex and OpenCode</p>
+      <h1>Agents can’t <em>lie</em> about tests.</h1>
+      <p class="lede">keelyard stops a coding agent from finishing until a passing test run proves the work on the current files. Every edit is snapshotted, so any step can be undone. It runs locally, with no telemetry.</p>
+      <div class="actions">
+        <a class="btn" href="#install">Install</a>
+        <a class="btn btn--ghost" href="https://github.com/akobirjontulqinovfuture/keelyard">Star on GitHub <span data-stars hidden></span></a>
+      </div>
+      <!-- Montajyor: place assets/video/hero.mp4 and set data-video="assets/video/hero.mp4" -->
+      <figure class="reel" data-video="">
+        <div class="reel__frame" id="promoSlot">
+          <img src="assets/poster.svg" width="1280" height="720" alt="keelyard proof gate in a terminal: the session is blocked until tests are verified">
+          <figcaption class="reel__cap">Promo slot — drop in the video when it’s ready</figcaption>
+        </div>
+      </figure>
+    </section>
+
+    <section class="story" id="story">
+      <div class="story__pin">
+        <div class="story__copy">
+          <p class="eyebrow">01 — The proof gate</p>
+          <h2 id="storyTitle">The agent edits.</h2>
+          <p class="story__lead" id="storyLead">Every change is snapshotted as it happens.</p>
+          <ol class="beats" id="beats">
+            <li class="is-on">Edit</li>
+            <li>Gate blocks</li>
+            <li>Tests pass</li>
+            <li>Done</li>
+          </ol>
+        </div>
+        <div class="term" aria-live="polite" aria-label="Scroll-driven terminal story">
+          <div class="term__bar"><span>keelyard · proof</span></div>
+          <pre class="term__body" id="termBody"></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="rewind" id="rewind">
+      <div class="rewind__copy">
+        <p class="eyebrow">02 — Snapshots</p>
+        <h2>Undo any step.</h2>
+        <p class="lede lede--narrow">Every edit is written into <code>.keelyard/shadow.git</code>. Your own <code>.git</code> is never read or written by rewind. Secrets (<code>.env</code>, keys) are never snapshotted. <code>keelyard rewind to &lt;n&gt;</code> is itself undoable.</p>
+      </div>
+      <div class="tl" id="timeline" aria-label="Snapshot timeline">
+        <ol class="tl__row" id="tlRow">
+          <li class="is-on" data-n="1"><b>01</b><span>init</span></li>
+          <li data-n="2"><b>02</b><span>edits</span></li>
+          <li data-n="3"><b>03</b><span>tests deleted</span></li>
+          <li data-n="4"><b>04</b><span>tried to stop</span></li>
+        </ol>
+        <div class="tl__track"><i id="tlFill"></i></div>
+        <p class="tl__status" id="tlStatus">Snapshot 1 — starting point.</p>
+        <button type="button" class="btn btn--ghost" id="btnRewind">keelyard rewind to 2</button>
+      </div>
+    </section>
+
+    <section class="install" id="install">
+      <p class="eyebrow">03 — Quickstart</p>
+      <h2>Thirty seconds.</h2>
+      <p class="lede lede--narrow">Install with pipx (or <code>pip install keelyard</code>). <code>init --preset lean</code> wires Claude Code, Codex and OpenCode and uses the fewest tokens. <code>keelyard doctor</code> checks the hookup. <code>keelyard uninstall</code> gives your config files back byte for byte.</p>
+      <div class="shell">
+        <div class="shell__bar">
+          <span>install</span>
+          <button type="button" class="copy" id="btnCopy" aria-label="Copy install commands">Copy</button>
+        </div>
+        <pre id="installCmd">pipx install keelyard
+cd your-project
+keelyard init --preset lean
+keelyard doctor</pre>
+      </div>
+      <p class="fine">Global wiring: <code>keelyard init --global</code>, then <code>keelyard doctor --json</code> should return <code>"ok": true</code>. Latest main: <code>pipx install git+https://github.com/akobirjontulqinovfuture/keelyard</code>.</p>
+    </section>
+
+    <section class="agents" id="agents">
+      <p class="eyebrow">04 — Agents</p>
+      <h2>Claude Code, Codex, OpenCode.</h2>
+      <p class="lede lede--narrow"><code>keelyard init</code> writes the hooks and the MCP server entry for you. <code>keelyard doctor</code> checks them. CI runs on Linux, macOS and Windows.</p>
+      <ul class="cards">
+        <li>
+          <h3>Claude Code</h3>
+          <p>Hooks in <code>.claude/settings.json</code>, MCP in <code>.mcp.json</code>, plus a CLAUDE.md block.</p>
+          <pre>keelyard init --agent claude</pre>
+        </li>
+        <li>
+          <h3>Codex</h3>
+          <p>Hooks in <code>.codex/hooks.json</code>. MCP in Codex config; use <code>--codex-project-mcp</code> for a project entry. Type <code>/hooks</code> once to trust them.</p>
+          <pre>keelyard init --agent codex --codex-project-mcp</pre>
+        </li>
+        <li>
+          <h3>OpenCode</h3>
+          <p>Plugin at <code>.opencode/plugins/keelyard.js</code>, MCP in <code>opencode.json</code>.</p>
+          <pre>keelyard init --agent opencode</pre>
+        </li>
+      </ul>
+      <p class="fine">MCP tools cover proof, memory and code navigation. Every CLI command takes <code>--json</code>. Read what keelyard <a href="https://github.com/akobirjontulqinovfuture/keelyard/blob/main/docs/guarantees.md">guarantees and what it doesn’t</a> before you rely on it: snapshots undo files, not databases or deploys; proof is only as good as your tests.</p>
+    </section>
+
+    <section class="cta" id="github">
+      <h2>Star the repo.</h2>
+      <p class="lede">Open source, Apache-2.0. Source, issues and docs live on GitHub.</p>
+      <a class="btn" href="https://github.com/akobirjontulqinovfuture/keelyard">github.com/akobirjontulqinovfuture/keelyard <span data-stars hidden></span></a>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <a class="nav__brand" href="#"><img src="assets/lockup-dark.svg" alt="keelyard" width="148" height="28"></a>
+    <p>Apache-2.0 · Local only · No telemetry · <a href="https://akobirjontulqinovfuture.github.io/keelyard/">Docs</a> · <a href="https://pypi.org/project/keelyard/">PyPI</a> · <a href="https://github.com/akobirjontulqinovfuture/keelyard/blob/main/LICENSE">License</a></p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
